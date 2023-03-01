@@ -1,0 +1,245 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "apkmirror-instagram-version-check-and-variants",
+    "description": "The API for the Instagram version check",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1",
+      "description": "APKMirror Instagram"
+    }
+  ],
+  "paths": {
+    "/refreshdata": {
+      "get": {
+        "tags": ["Refresh and get the latest data"],
+        "description": "refreshing db to get latets data",
+        "operationId": "refreshData",
+        "responses": {
+          "200": {
+            "description": "Refresh the data"
+          }
+        }
+      }
+    },
+    "/versions": {
+      "get": {
+        "tags": [
+          "All Versions"
+        ],
+        "description": "returns all the latest Instagram versions with variants",
+        "operationId": "allVersions",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "number of records to skip",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "max number of records to return",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All the versions and number of variants",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uri",
+                    "example": "http://10.0.0.225:8080"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/version/{versionId}": {
+      "get": {
+        "tags": [
+          "Single Version"
+        ],
+        "description": "returns single Instagram version's informations and variants",
+        "operationId": "singleVersion",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response"
+          }
+        },
+        "x-swagger-router-controller": "Single Version"
+      },
+      "delete": {
+        "tags": [
+          "Single Version"
+        ],
+        "description": "update single Instagram version's informations and variants",
+        "operationId": "deleteSingleVersion",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response"
+          }
+        },
+        "x-swagger-router-controller": "Single Version"
+      },
+      "patch": {
+        "tags": [
+          "Single Version"
+        ],
+        "description": "update single Instagram version's informations and variants",
+        "operationId": "updateSingleVersion",
+        "parameters": [
+          {
+            "name": "versionId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "single Instagram version's informations to be updated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Versions"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "response"
+          }
+        },
+        "x-swagger-router-controller": "Single Version"
+      }
+    },
+    "/checkversion/{agent}": {
+      "post": {
+        "tags": [
+          "Check User Version"
+        ],
+        "description": "check single user's Instagram version's informations if it pass",
+        "operationId": "checkUserVersion",
+        "parameters": [
+          {
+            "name": "agent",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "single user's phone version is valid to install Instagram",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uri",
+                    "example": "http://10.0.0.225:8080"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Versions": {
+        "type": "object",
+        "properties": {
+          "version_id": {
+            "type": "string"
+          },
+          "release_date": {
+            "type": "string"
+          },
+          "v_variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SingleVariant"
+            }
+          }
+        },
+        "description": "ok"
+      },
+      "SingleVariant": {
+        "type": "object",
+        "properties": {
+          "variants_id": {
+            "type": "number"
+          },
+          "architecture": {
+            "type": "string"
+          },
+          "min_android_version": {
+            "type": "string"
+          },
+          "screen_dpi": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

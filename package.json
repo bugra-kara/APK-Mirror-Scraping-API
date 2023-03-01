@@ -1,0 +1,38 @@
+{
+  "dependencies": {
+    "axios": "^1.3.4",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.7.0",
+    "helmet": "^6.0.1",
+    "mongoose": "^6.10.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2",
+    "xss-clean": "^0.1.1",
+    "yaml": "^2.2.1"
+  },
+  "name": "apkmirror-case",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bugra-kara/apkmirror-case.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bugra-kara/apkmirror-case/issues"
+  },
+  "homepage": "https://github.com/bugra-kara/apkmirror-case#readme",
+  "description": ""
+}
